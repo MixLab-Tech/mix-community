@@ -1,0 +1,220 @@
+<%- include('../sidebar.html') %>
+ 
+    <div id='apply-mixlab-pannel'>
+        <div class="close-pannel-btn">X</div>
+          <% if (typeof user.error !== 'undefined' && user.error) {
+            
+            %>
+          <div class="alert alert-error">
+            <a class="close" data-dismiss="alert" href="#">&times;</a>
+            <strong>
+              <%= user.error %></strong>
+          </div>
+          <% } %>
+          <% if (typeof user.success !== 'undefined' && user.success) { %>
+          <div class="alert alert-success">
+            <strong>
+              <%= user.success %></strong>
+          </div>
+          <% } %>
+          <form id='setting_form' class='form-horizontal' action='/setting' method='post'>
+          
+          <!-- <div class='control-group'>
+              <label class='control-label'>用户名</label>
+              <div class='controls'>
+                <div class='info-xlarge'>
+                  <%= user.loginname %>
+                </div>
+              </div>
+            </div>
+    --> 
+            <div class='control-group'>
+              <label class='control-label' for='github'>用户名</label>
+              <div class='controls'>
+                  <div class='info-xlarge'>
+                      <%= user.githubUsername %>
+                    </div>
+                <p class="info-p">同GitHub用户名，可通过 GitHub 登陆 mixlab社区 来修改</p>
+              </div>
+            </div>
+            <div class='control-group'>
+                <label class='control-label' for='weixin'>微信号</label>
+      
+                <div class='controls'>
+                  <input class='input-xlarge' id='weixin' name='weixin' size='24' type='text' value="<%= typeof user.weixin !== 'undefined' ? user.weixin : '' %>"
+                    placeholder="请填写正确的微信号，否则将影响加入社区" />
+                </div>
+              </div>
+    
+              <div class='control-group'>
+                  <label class='control-label' for='slash'>斜杠标签</label>
+        
+                  <div class='controls'>
+                    <input class='input-xlarge' id='slash' name='slash' size='32' type='text' value="<%= typeof user.slash !== 'undefined' ? user.slash : '' %>"
+                      placeholder="e.g. xx公司xx职位／xx学校xx专业/xxx职业" />
+                  </div>
+                </div>
+    
+                <div class='control-group'>
+                    <label class='control-label' for='location'>常驻地</label>
+          
+                    <div class='controls'>
+                      <input class='input-xlarge' id='location' name='location' size='30' type='text' value="<%= typeof user.location !== 'undefined' ? user.location : '' %>" />
+                    </div>
+                  </div>
+    
+                <div class='control-group'>
+                    <label class='control-label' for='age'>年龄</label>
+          
+                    <div class='controls'>
+                      <input class='input-xlarge' id='age' name='age' size='10' type='text' value="<%= typeof user.age !== 'undefined' ? user.age : '' %>"
+                        placeholder="e.g. 20/30/40" />
+                    </div>
+                  </div>
+    
+    
+                  <div class='control-group'>
+                      <label class='control-label' for='zodiac'>星座</label>
+            
+                      <div class='controls'>
+                        <input class='input-xlarge' id='zodiac' name='zodiac' size='10' type='text' value="<%= typeof user.age !== 'undefined' ? user.age : '' %>"
+                          placeholder="e.g. 射手/水瓶/白羊" />
+                      </div>
+                    </div>
+    
+    
+                    <div class='control-group'>
+                        <label class='control-label' for='signature'>个性签名</label>
+              
+                        <div class='controls'>
+                          <textarea class='input-xlarge input-info' id='signature' name='signature' size='88' placeholder="描述你的跨界经历或者工作学习经历,或其他任何想作为签名档的都OK～" ><%= typeof user.signature !== 'undefined' ? user.signature : "" %></textarea>
+                        </div>
+                      </div>
+    
+    
+                      <div class='control-group'>
+                          <label class='control-label' for='vision'>愿景/需求</label>
+                
+                          <div class='controls'>
+                            <textarea class='input-xlarge input-info' id='vision' name='vision' size='88' placeholder="描述你现在最想做的事，或者idea／理想之类的"><%= typeof user.vision !== 'undefined' ? user.vision : "" %></textarea>
+                          </div>
+                        </div>
+    
+                        <div class='control-group'>
+                            <label class='control-label' for='resources'>可提供的资源</label>
+                  
+                            <div class='controls'>
+                              <textarea class='input-xlarge input-info' id='resources' name='resources' size='88' placeholder="你擅长的技能／资源"><%= typeof user.resources !== 'undefined' ? user.resources : "" %></textarea>
+                            </div>
+                          </div>
+    
+    
+            <!-- 
+            <div class='control-group'>
+              <label class='control-label' for='email'>电子邮件</label>
+    
+              <div class='controls'>
+                <input class='input-xlarge readonly' id='email' name='email' size='30' type='text'
+                  readonly='true' value="<%= user.email %>"/>
+    
+                <p>同时决定了 Gravatar 头像</p>
+              </div>
+            </div>
+              <div class='control-group'>
+              <label class='control-label' for='url'>个人网站</label>
+    
+              <div class='controls'>
+                <input class='input-xlarge' id='url' name='url' size='30' type='text' value="<%= typeof user.url !== 'undefined' ? user.url : '' %>" />
+              </div>
+            </div>
+    
+            -->
+    
+          
+    
+    
+    
+           
+    
+            <input type='hidden' id='action' name='action' value='change_setting' />
+            <input type='hidden' name='_csrf' value='<%= user.csrf %>' />
+    
+
+            <div class='form-actions'>
+              <input type='submit' class='span-primary submit_btn' data-loading-text="<%= user.weixin?'修改中ing':'提交中ing..' %>" value='<%= user.weixin?"修改":"提交申请" %>' />
+            </div>
+
+          </form>
+          <script>
+            $('.close-pannel-btn').bind('click',(e)=>{
+              window.location.href='/';
+            });
+          </script>
+      </div>
+ 
+
+
+  <!--
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>更改密码</span>
+    </div>
+    <div class='inner'>
+      <form id='change_pass_form' class='form-horizontal' action='/setting' method='post'>
+        <div class='control-group'>
+          <label class='control-label' for='old_pass'>当前密码</label>
+
+          <div class='controls'>
+            <input class='input-xlarge' type='password' id='old_pass' name='old_pass' size='30' />
+          </div>
+        </div>
+        <div class='control-group'>
+          <label class='control-label' for='new_pass'>新密码</label>
+
+          <div class='controls'>
+            <input class='input-xlarge' type='password' id='new_pass' name='new_pass' size='30' />
+          </div>
+        </div>
+        <input type='hidden' id='action' name='action' value='change_password' />
+        <input type='hidden' name='_csrf' value='<%= user.csrf %>' />
+
+        <div class='form-actions'>
+          <input type='submit' class='span-primary submit_btn' data-loading-text="更改中.." value='更改密码' />
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>Access Token</span>
+    </div>
+    <div class='inner'>
+      <div>
+        <span>字符串：</span>
+        <%- user.accessToken %>
+      </div>
+      <div>
+        <span>二维码：</span>
+        <span id="access-token-qrcode"></span>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  // qrcode generate
+  var accessToken = "<%- user.accessToken %>";
+  new QRCode(document.getElementById("access-token-qrcode"), {
+    text: accessToken,
+    width: 200,
+    height: 200,
+  });
+  // END qrcode generate
+</script>
+
+-->
+
+ 
+
+

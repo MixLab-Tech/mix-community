@@ -1,0 +1,93 @@
+
+<% include ./sidebar.html %>
+
+<div id="content">
+ 
+  <% if(current_user){ //.weixin %>
+
+    <% if(current_user.weixin){ %>
+
+  <div class="panel">
+    <div class="header">
+      <% [['all', '全部'], ['good', '精选']].concat(tabs.slice(0,2)).forEach(function (pair) {
+          var value = pair[0];
+          var text = pair[1]; %>
+          <a href="<%= value ? '/?tab=' + value : '/' %>"
+            class="topic-tab <%= value === tab ? 'current-tab' : '' %>"><%= text %></a>
+        <% }) %>
+        <div class="more_tab_btn topic-tab" id="more_tabs_btn">超级节点</div>
+    <div class="more_tab">
+      <div class="close-pannel-btn">X</div>
+      <script>
+      $('.close-pannel-btn').bind('click',(e)=>{
+        e.preventDefault();
+        $('.more_tab').css("display","none");
+      });
+      </script>
+      <div class="more_tab_content">   
+      <% tabs.slice(2,tabs.length).forEach(function (pair) {
+        var value = pair[0];
+        var text = pair[1]; %>
+        <a href="<%= value ? '/?tab=' + value : '/' %>"
+          class="topic-tab <%= value === tab ? 'current-tab' : '' %>"><%= text %></a>
+      <% }) %>
+    </div>
+    </div>
+    </div>
+    <% if (typeof topics !== 'undefined' && topics.length > 0) { %>
+    <div class="inner no-padding">
+      <%- include('./topic/list.html', {
+        topics: topics,
+        pages: pages,
+        current_page: current_page,
+        base: '/'
+      }) %>
+    </div>
+    <% } else { %>
+    <div class="inner topic-detail">
+      <% [['all', '全部','所有的都在这里'], ['good', '精选','社区推荐']].concat(tabs).forEach((pair)=>{
+        var value = pair[0];
+        var text = pair[1];
+        var detail=pair[2];
+        if(value==tab){
+        %>
+        <div class="topic-detail-header">
+            <div class="h4"><%= text %></div>
+            <div class="p"><%= detail %></div>
+        </div>
+        
+       <%} }); %>
+    </div>
+    <% } %>
+  </div>
+  <script>
+    $('#more_tabs_btn').bind('click',(e)=>{
+      e.preventDefault();
+      $('.more_tab').css("display","flex");
+    })
+  </script>
+</div>
+<% };
+ if(!current_user.weixin){ %>
+  
+    <div id="apply-mixlab">
+      <img src="/public/images/logo_text_long.png" alt="" class="apply-mixlab-logo"> 
+      <a class="span-primary submit_btn"   href='/setting'>申请加入社区</a>  
+    </div>
+   
+<% }  }else{ %> 
+<div id="login-mixlab">
+  <img src="/public/images/logo_text_long.png" alt="" class="apply-mixlab-logo">
+
+      <a href="/passport/github" class="github-login-btn">
+        <p class="span-info">
+          通过 GitHub 登录
+        </p>  
+        <p class="tip" style="font-size:12px;color:white;">请先注册 Github 获得账号后，再登陆社区</p>
+   
+      </a>
+      
+  
+</div>
+ 
+<% } %> 

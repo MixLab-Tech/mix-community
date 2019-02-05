@@ -1,0 +1,7 @@
+<% if (topic.top) { %>
+<div class='put_top'>置顶</div>
+<% } else if (topic.good) { %>
+<div class='put_good'>精华</div>
+<% } else if (typeof tab !== 'undefined' &&  tab === 'all' && helper.tabName(topic.tab)) { %>
+<div class="topiclist-tab"><%= helper.tabName(topic.tab) %></div>
+<% } %>
