@@ -184,7 +184,7 @@ class UserController extends Controller {
       user.success = '提交成功，正在审核中ing～';
     }
 
-    return await ctx.render('user/setting', { user, pageTitle: '申请'});
+    return await ctx.render('user/setting', { user, pageTitle: '申请' });
   }
 
   async setting() {
@@ -192,20 +192,20 @@ class UserController extends Controller {
     // 显示出错或成功信息
     async function showMessage(msg, data, isSuccess) {
       data = data || ctx.request.body;
-      //console.log(data)
+      // console.log(data)
       const user = {
         loginname: data.loginname,
         email: data.email,
-        //url: data.url,
+        // url: data.url,
         location: data.location,
         signature: data.signature,
-        //weibo: data.weibo,
-        weixin:data.weixin,
-        slash:data.slash,
-        age:data.age,
-        zodiac:data.zodiac,
-        vision:data.vision,
-        resources:data.resources,
+        // weibo: data.weibo,
+        weixin: data.weixin,
+        slash: data.slash,
+        age: data.age,
+        zodiac: data.zodiac,
+        vision: data.vision,
+        resources: data.resources,
         accessToken: data.accessToken,
       };
 
@@ -215,39 +215,39 @@ class UserController extends Controller {
         user.error = msg;
       }
 
-      return await ctx.render('user/setting', { user:user });
+      return await ctx.render('user/setting', { user });
     }
 
     // post
     const { body } = ctx.request;
     const action = body.action;
     if (action === 'change_setting') {
-      //const url = validator.trim(body.url);
+      // const url = validator.trim(body.url);
       const location = validator.trim(body.location);
-      //const weibo = validator.trim(body.weibo);
-      const weixin=validator.trim(body.weixin);
-      const slash=validator.trim(body.slash);
-      const age=validator.trim(body.age);
-      const zodiac=validator.trim(body.zodiac);
-      const vision=validator.trim(body.vision);
+      // const weibo = validator.trim(body.weibo);
+      const weixin = validator.trim(body.weixin);
+      const slash = validator.trim(body.slash);
+      const age = validator.trim(body.age);
+      const zodiac = validator.trim(body.zodiac);
+      const vision = validator.trim(body.vision);
       const signature = validator.trim(body.signature);
-      const resources=validator.trim(body.resources);
+      const resources = validator.trim(body.resources);
 
       const user = await service.user.getUserById(ctx.user._id);
-     // user.url = url;
+      // user.url = url;
       user.location = location;
       user.signature = signature;
-      //user.weibo = weibo;
+      // user.weibo = weibo;
       user.weixin = weixin;
-      user.slash=slash;
-      user.age=age;
-      user.zodiac=zodiac;
-      user.vision=vision;
-      user.resources=resources;
+      user.slash = slash;
+      user.age = age;
+      user.zodiac = zodiac;
+      user.vision = vision;
+      user.resources = resources;
 
       await user.save();
       return ctx.redirect('/');
-      //setting?save=success
+      // setting?save=success
     }
 
     if (action === 'change_password') {

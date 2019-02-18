@@ -7,7 +7,7 @@ class MessageController extends Controller {
     const { ctx } = this;
     const userId = ctx.user._id;
     const msgService = ctx.service.message;
-    const [readMessageResults, unReadMessageResults] = await Promise.all([
+    const [ readMessageResults, unReadMessageResults ] = await Promise.all([
       msgService.getReadMessagesByUserId(userId),
       msgService.getUnreadMessagesByUserId(userId),
     ]);
@@ -16,9 +16,9 @@ class MessageController extends Controller {
 
     // 把未读消息全部设置成已读
     await msgService.updateMessagesToRead(userId, unReadMessageResults);
-    await ctx.render('message/index.html', { 
-      tab:null,
-      has_read_messages: hasReadMessages, 
+    await ctx.render('message/index.html', {
+      tab: null,
+      has_read_messages: hasReadMessages,
       hasnot_read_messages: hasUnReadMessages });
   }
 }

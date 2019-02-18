@@ -16,7 +16,12 @@ module.exports = app => {
     location: { type: String },
     signature: { type: String },
     profile: { type: String },
-    weixin:{type:String},
+    weixin: { type: String },
+    slash: { type: String },
+    age: { type: String },
+    zodiac: { type: String },
+    vision: { type: String },
+    resources: { type: String },
     weibo: { type: String },
     avatar: { type: String },
     githubId: { type: String },
@@ -48,17 +53,18 @@ module.exports = app => {
   });
 
   UserSchema.index({ loginname: 1 }, { unique: true });
-  UserSchema.index({ email: 1 }, { unique: true });
+  UserSchema.index({ email: 1 }, { unique:false });
+  UserSchema.index({ weixin: 1 }, { unique: true });
   UserSchema.index({ score: -1 });
   UserSchema.index({ githubId: 1 });
   UserSchema.index({ accessToken: 1 });
 
-  UserSchema.virtual('avatar_url').get(function() {
+  UserSchema.virtual('avatar_url').get(function () {
     let url =
       this.avatar ||
       'https://gravatar.com/avatar/' +
-        utility.md5(this.email.toLowerCase()) +
-        '?size=48';
+      utility.md5(this.email.toLowerCase()) +
+      '?size=48';
 
     // www.gravatar.com 被墙
     url = url.replace('www.gravatar.com', 'gravatar.com');
@@ -76,12 +82,12 @@ module.exports = app => {
     return url;
   });
 
-  UserSchema.virtual('isAdvanced').get(function() {
+  UserSchema.virtual('isAdvanced').get(function () {
     // 积分高于 700 则认为是高级用户
     return this.score > 700 || this.is_star;
   });
 
-  UserSchema.pre('save', function(next) {
+  UserSchema.pre('save', function (next) {
     const now = new Date();
     this.update_at = now;
     next();

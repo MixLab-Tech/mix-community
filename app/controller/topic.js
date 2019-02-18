@@ -97,7 +97,7 @@ class TopicController extends Controller {
     const { ctx, config } = this;
     await ctx.render('topic/edit', {
       tabs: config.tabs,
-      tab:ctx.query.tab
+      tab: ctx.query.tab,
     });
   }
 

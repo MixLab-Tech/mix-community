@@ -1,53 +1,71 @@
-# mixlab
+# mix社区
 
-[![powered by Egg.js][egg-image]][egg]
-[![build status][travis-image]][travis-url]
-[![Test coverage][codecov-image]][codecov-url]
-[![David deps][david-image]][david-url]
-[![Known Vulnerabilities][snyk-image]][snyk-url]
+## mix社区是跨界社区，融合机器思维/设计思维/商业思维。
+
+## mix社区是mixlab的线上社区，mixlab是一所面向未来的实验室。
 
 
+## 我们的愿景是：
+让每个人无限可能
+Enable Infinite Possibilities for Everyone!
+
+此版本基于egg的nodejs社区二次开发而来。
 
 ## QuickStart
-
+如何开始：
 <!-- add docs here for user -->
 
-see [egg docs][egg] for more detail.
-
 ### Environment Dependencies
+数据存储在mongodb，并使用redis做缓存。
 
 - [redis](https://redis.io/)
 - [mongodb](https://www.mongodb.com/)
 
 #### macOS Install
+mac系统安装步骤：
 
 ```bash
-brew install redis mongodb
-brew services start redis
-brew services start mongodb
+$ brew install redis mongodb
+$ brew services start redis
+$ brew services start mongodb
 ```
 
-#### Linux Install
+其他系统安装方式请参考redis、mongodb官方文档。
 
-TBD
-
-#### Windows Install
-
-TBD
 
 ### Development
 
+先从mixlab官方仓库下载项目
+
+```bash
+$ git clone https://github.com/MixLab-Tech/mix-community.git
+```
+
+然后用npm或者yarn安装依赖包
 ```bash
 $ npm i
+```
+
+开发项目
+```bash
 $ npm run dev
+```
+
+浏览器打开地址：
+```bash
 $ open http://localhost:1215/
 ```
 
 ### Deploy
+部署到线上服务器
 
+修改文件：
 ```js 
 // {app_root}/config/config.prod.js
+```
 
+内容修改为：
+```js
 exports.mini_assets = true;
 
 exports.alinode = {
@@ -57,6 +75,7 @@ exports.alinode = {
 };
 ```
 
+运行：
 ```bash
 $ npm i --production
 $ npm run assets
@@ -64,15 +83,17 @@ $ npm start
 $ npm stop
 ```
 
+
 ### npm scripts
+其他命令，包括代码检查、单元测试等。
 
 - Use `npm run lint` to check code style.
 - Use `npm test` to run unit test.
 - Use `npm run autod` to auto detect dependencies upgrade, see [autod](https://www.npmjs.com/package/autod) for more detail.
 
-### Tutorials
 
-- [Develop / Deploy with Docker](tutorials/Docker.md)
+### Tutorials
+开发过程中可以在mix社区求助，或者参考：
 
 [egg]: https://eggjs.org
 

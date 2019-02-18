@@ -17,9 +17,9 @@ module.exports = app => {
   // home page
   router.get('/', site.index);
   // sitemap
-  router.get('/sitemap.xml', site.sitemap);
+  // router.get('/sitemap.xml', site.sitemap);
   // mobile app download
-  router.get('/app/download', site.appDownload);
+  // router.get('/app/download', site.appDownload);
 
   // sign controller
   if (config.allow_sign_up) {
@@ -45,6 +45,11 @@ module.exports = app => {
 
   // github oauth
   app.passport.mount('github');
+  //console.log(app.passport,"app.passport");
+  //router.get('/passport/github',sign.github_oauth);
+  //router.get('/passport/github/callback', sign.github_callback)
+
+
 
   router.get('/search_pass', sign.showSearchPass); // 找回密码页面
   router.post('/search_pass', sign.updateSearchPass); // 更新密码

@@ -77,36 +77,39 @@
   <div class='navbar'>
     <div class='navbar-inner'>
       <div class='container'>
-        <div class="navbar-left">
-          <a class='brand' href='/'>
-            <% if (config.site_logo) {%>
-            <img src="<%- helper.staticFile(config.site_logo) %>" />
-            <%} else {%>
-            <%- config.name %>
-            <%}%>
-          </a>
-
-
-          <a href='/' class="navbar-item">首页</a>
-          <!--<li><a href='/getstart'>新手入门</a></li>
-            <li><a href='/api'>API</a></li>-->
-          <a href='/about' class="navbar-item">关于</a>
-
-          <form id='search_form' class="navbar-item" action="/search">
-            <input type='text' id='q' name='q' class='search-query span3' value='' />
-          </form>
+        <div style="width: 50%;
+        max-width: 500px;">
+            <a class='brand' href='/'>
+              <% if (config.site_logo) {%>
+              <img src="<%- helper.staticFile(config.site_logo) %>" />
+              <%} else {%>
+              <%- config.name %>
+              <%}%>
+            </a>
+            <div class="navbar-left">
+       
+                <a href='/' class="navbar-item ">首页</a>
+                <!--<li><a href='/getstart'>新手入门</a></li>
+                  <li><a href='/api'>API</a></li>-->
+                <a href='/about' class="navbar-item">关于</a>
+      
+                <form id='search_form'  action="/search" class="">
+                  <input type='text' id='q' name='q' class='search-query span3' value='' />
+                </form>
+              </div>
         </div>
+         
+ <div style="width: 90%;max-width: 520px;display: flex;justify-content: flex-end;">
         <div class="navbar-right">
           <% if (current_user){ %>
 
           <a href='/my/messages' class="navbar-item">
-            <% if (current_user.messages_count) { %>
-            <span class='big messages_count'>
-              <%= current_user.messages_count %></span>
-            <% } %>
-            未读消息
+            未读消息 <% if (current_user.messages_count) { %>
+              <span class='big messages_count'>
+                <%= current_user.messages_count %></span>
+              <% } %>
           </a>
-
+ 
           <% } %>
           <%
             var site_navs = config.site_navs || [];
@@ -117,16 +120,18 @@
             <%- nav[1] %></a>
           <% } %>
           <% if (current_user) { %>
-          <a class="navbar-item" href='/setting'>
+          <a class="navbar-item " href='/setting'>
             <%= current_user.weixin?'修改个人信息':'申请' %></a>
 
-          <a class="navbar-item" href='/signout' data-method="post" rel="nofollow">退出</a>
+          <a class="navbar-item " href='/signout' data-method="post" rel="nofollow">退出</a>
 
           <% } else { %>
-          <a class="navbar-item" href='/signup'>注册/登录</a>
+          <a class="navbar-item " href='/signup'>注册/登录</a>
           <!--<li><a href='/signin'>登录</a></li>-->
           <% } %>
+
         </div>
+      </div>
         <a class="btn btn-navbar" id="responsive-sidebar-trigger">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>

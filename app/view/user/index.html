@@ -2,23 +2,52 @@
 
 <div id="content">
   <div class="panel">
-    <div class="header">
-      <ul class="breadcrumb">
-        <li><a href="/">主页</a><span class="divider">/</span></li>
-        <% if (typeof user === 'undefined') { %>
-          <li class="active">通知</li>
-        <% } %>
-      </ul>
-    </div>
+
     <% if (typeof user !== 'undefined') { %>
       <div class="inner userinfo">
-        <div class="user_big_avatar">
-          <img src="<%= helper.proxy(user.avatar_url) %>" class="user_avatar" title="<%= user.loginname %>">
+          <div class="header">
+              <ul class="breadcrumb">
+                  <li class='active pannel-tip-title'>个人信息</li>
+                <% if (typeof user === 'undefined') { %>
+                  <li class="active">通知</li>
+                <% } %>
+              </ul>
+            </div>
+        <div style="display:flex;padding:20px;" >
+            <div class="user_big_avatar">
+                <img src="<%= helper.proxy(user.avatar_url) %>" class="user_avatar" title="<%= user.loginname %>">
+              </div>
+              <div >
+                  <% if (user.slash) { %>
+                    <div class="user-info-item">
+                      <div class="title">斜杆</div>
+                      <div class='content dark'><%= user.slash %></div>
+                    </div>
+                    <% } %>
+                    <% if (user.githubUsername) { %>
+                      <div class="user-info-item">
+                          <div class="title"><i class="fa fa-lg fa-fw fa-github"></i></div>
+                          <div class='content dark'>
+                              <a class='dark' href="https://github.com/<%= user.githubUsername %>" target='_blank'>
+                                @<%= user.githubUsername %>
+                              </a>
+                          </div>
+                      </div>
+                      <% } %>
+              </div>
         </div>
-        <a class="dark"><%= user.loginname %></a>
-        <div class="user_profile">
+        
+        
+        
+        
+        <div class="user_profile"  style="display:flex;">
           <ul class="unstyled">
-            <span class="big"><%= user.score %></span> 积分
+  
+              <div class="user-info-item">
+                  <div class="title">积分</div>
+                  <div class='content dark'><%= user.score %></div>
+                </div>
+            
             <% if (user.collect_topic_count) {%>
             <li>
               <a class='dark' href="/user/<%= user.loginname %>/collections">
@@ -26,35 +55,51 @@
               </a>
             </li>
             <%}%>
-            <% if (user.url) { %>
-            <li>
-              <i class="fa fa-lg fa-fw fa-home"></i>
-              <a class='dark' href="<%= user.url %>" target='_blank'><%= user.url %></a>
-            </li>
-            <% } %>
+
+
+            <% if (user.zodiac) { %>
+              <div class="user-info-item">
+                  <div class="title">星座</div>
+                  <div class='content dark'><%= user.zodiac %></div>
+                </div>
+              <% } %>
+
             <% if (user.location) { %>
-            <li>
-              <i class="fa fa-lg fa-fw fa-map-marker"></i>
-              <span class='dark'><%= user.location %></span>
-            </li>
+              <div class="user-info-item">
+                  <div class="title">常驻地</div>
+                  <div class='content dark'><%= user.location %></div>
+                </div>
+          
             <% } %>
-            <% if (user.githubUsername) { %>
-            <li>
-              <i class="fa fa-lg fa-fw fa-github"></i>
-              <a class='dark' href="https://github.com/<%= user.githubUsername %>" target='_blank'>
-                @<%= user.githubUsername %>
-              </a>
-            </li>
+
+            <% if (user.signature) { %>
+              <div class="user-info-item">
+                  <div class="title">个性签名</div>
+                  <div class='content dark'><%= user.signature %></div>
+                </div>
             <% } %>
-            <% if (user.weibo) { %>
-            <li>
-              <i class="fa fa-lg fa-fw fa-twitter"></i>
-              <a class='dark' href="<%= user.weibo %>" target='_blank'><%= user.weibo %></a>
-            </li>
-            <% } %>
+            <% if (user.resources) { %>
+              <div class="user-info-item">
+                  <div class="title">可提供</div>
+                  <div class='content dark'><%= user.resources %></div>
+                </div>
+              <% } %>
+              <% if (user.vision) { %>
+                <div class="user-info-item">
+                    <div class="title">愿景</div>
+                    <div class='content dark'><%= user.vision %></div>
+                  </div>
+                <% } %>
+            
+            
+
           </ul>
         </div>
-        <p class="col_fade">注册时间 <%= helper.ago(user.create_at) %></p>
+        <div class="user-info-item">
+            <div class="title">注册时间</div>
+            <div class='content dark'><%= helper.ago(user.create_at) %></div>
+        </div>
+
         <% if (current_user && current_user.is_admin) { %>
           <% if (!user.is_star) { %>
           <span class='span-common' id='set_star_btn' action='set_star'>设为达人</span>
@@ -69,9 +114,16 @@
           <% } %>
 
           <span class="span-common" id="delete_all">删除所有发言</span><br/><br/>
-
-          Email (Seen by Administrator): <a href="mailto:<%= user.email %>"><%= user.email %></a>
-
+          <div style="padding-left:20px;">管理员可见</div>
+          <div class="user-info-item">
+              <div class="title">微信号</div>
+              <div class='content dark'><%= user.weixin %></div>
+            </div>
+            <div class="user-info-item">
+                <div class="title">年龄</div>
+                <div class='content dark'><%= user.age %></div>
+              </div>
+          
           <% if (!user.active) { %>
           <a href="/active_account?key=<%- typeof token !== 'undefined' && token %>&name=<%= user.loginname %>"
              target="_blank">
@@ -86,12 +138,10 @@
   </div>
   <% if (typeof user !== 'undefined') { %>
   <div class="panel">
-    <div class="header">
-      <span class="col_fade">最近创建的话题</span>
-    </div>
+    
     <% if (typeof recent_topics !== 'undefined' && recent_topics.length > 0) { %>
       <% recent_topics.map((topic, index) => { %>
-        <%- include('../topic/abstract.html', { topic }) %>
+        <%- include('../topic/abstract.html', { topic:topic,title:"最近创建的话题" }) %>
       <%}) %>
       <div class='cell more'>
         <a class='dark' href="/user/<%= user.loginname %>/topics">查看更多»</a>
@@ -103,12 +153,10 @@
     <% } %>
   </div>
   <div class="panel">
-    <div class="header">
-      <span class="col_fade">最近参与的话题</span>
-    </div>
+    
     <% if (typeof recent_replies !== 'undefined' && recent_replies.length > 0) { %>
       <% recent_replies.map((topic, index) => { %>
-        <%- include('../topic/abstract.html', { topic }) %>
+        <%- include('../topic/abstract.html', { topic:topic,title:"最近参与的话题"}) %>
       <%}) %>
       <div class='cell more'>
         <a class='dark' href="/user/<%= user.loginname %>/replies">查看更多»</a>

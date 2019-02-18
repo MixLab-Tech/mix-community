@@ -95,7 +95,7 @@ class HomeController extends Controller {
       pages,
       tabs: this.config.tabs,
       tab,
-      pageTitle: tabName && tabName + '版块' 
+      pageTitle: tabName && tabName + '版块',
     };
 
     await this.ctx.render('index', locals);

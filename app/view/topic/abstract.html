@@ -1,37 +1,70 @@
-<div class='cell' >
-  <a class="topic_title_wrapper" href='/topic/<%= topic._id %>'  title='<%= topic.title %>'>
-    <div class='topic_title' href='/topic/<%= topic._id %>' style="color:#795548 !important;">
+<div class='cell'>
+  <% if(typeof (title) == 'undefined'){
+      title='';}%>
+
+  <% if(title!=''){%>
+
+  <div class="header" style="margin:28px 0;">
+    <span class="col_fade pannel-tip-title">
+      <%=title %></span>
+  </div>
+  <%} %>
+
+
+  
+    <a class='topic_title' href='/topic/<%= topic._id %>' title='<%= topic.title %>'>
       <%= topic.title %>
+    </a>
+    
+    <div>
+      <a class="user_avatar" href="/user/<%= topic.author.loginname %>">
+        <img src="<%= helper.proxy(topic.author.avatar_url) %>" onerror='this.src="/public/images/default_avatar.gif"' />
+      </a>
+
+      <% if (topic.reply && topic.reply.author) {%>
+      <a class='user_avatar' href="/topic/<%= topic._id %><%- '#' + topic.reply._id %>">
+        <img class="user_small_avatar" src="<%= helper.proxy(topic.reply.author.avatar_url) %>" onerror='this.src="/public/images/default_avatar.gif"'>
+      </a>
+      <% } %>
     </div>
+
+
     <%- include('./_top_good.html', {topic: topic}) %>
-  </a>
-  <a class="user_avatar" href="/user/<%= topic.author.loginname %>">
-    <img src="<%= helper.proxy(topic.author.avatar_url) %>" title="<%= topic.author.loginname %>" />
-  </a>
+    <div class="reply_count">
+      <span class="count_of_replies" title="回复数">
+        <%= topic.reply_count %>回复
+      </span>
+      <span class="count_of_visits" title='阅读数'>
+        <%= topic.visit_count %>阅读
+      </span>
+    </div>
+  
 
-  <span class="reply_count">
-    <span class="count_of_replies" title="回复数">
-      <%= topic.reply_count %>
-    </span>
-    <span class="count_seperator">/</span>
-    <span class="count_of_visits" title='点击数'>
-      <%= topic.visit_count %>
-    </span>
-  </span>
+  
+    <div>
 
-  <% if (topic.reply && topic.reply.author) {%>
-  <a class='last_time' href="/topic/<%= topic._id %><%- '#' + topic.reply._id %>">
-    <img class="user_small_avatar" src="<%= helper.proxy(topic.reply.author.avatar_url) %>">
-    <span class="last_active_time">
-      <%= helper.ago(topic.last_reply_at) %></span>
-  </a>
-  <% } %>
-  <% if (!topic.reply) {%>
-  <span class='last_time'>
-    <span class="last_active_time">
-      <%= helper.ago(topic.create_at) %></span>
-  </span>
-  <% } %>
+      <% if (topic.reply && topic.reply.author) {%>
+      <!-- <a class='last_time' href="/topic/<%= topic._id %><%- '#' + topic.reply._id %>">
+        <img class="user_small_avatar" src="<%= helper.proxy(topic.reply.author.avatar_url) %>">  
+      </a>-->
+      <span class='last_time'>
+        <span class="last_active_time">
+          <%= helper.ago(topic.last_reply_at) %>
+        </span>
+      </span>
+      <% } %>
+      <% if (!topic.reply) {%>
+      <span class='last_time'>
+        <span class="last_active_time">
+          <%= helper.ago(topic.create_at) %>
+        </span>
+      </span>
+      <% } %>
+    </div>
+
+ 
+
+
 
 
 </div>

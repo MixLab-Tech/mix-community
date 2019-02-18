@@ -16,32 +16,42 @@
 }
 
 @media (max-width: 400px) {
-  .navbar .brand {
-      float: none;
-      margin: 0 auto;
-  }
-
-  .navbar .navbar-search {
-      clear: both;
-      margin: 0 auto;
-      float: none;
-  }
-
-  .navbar .search-query {
-      display: block;
-      margin: 0 auto;
-  }
+    #content .panel {
+        margin: 4px !important;
+     }
+     #sidebar{
+        padding: 0px 20px !important;
+        width: auto;
+     }
+     
 }
 
 @media (max-width: 979px) {
-
+    body{
+        overflow-x: hidden;
+    }
+    #create_topic_btn{
+      
+    }
+   .navbar-left{display: none}
+   .navbar-right{
+       display: none;
+   }
   .navbar {
       margin: 0 5px;
       z-index: 999;
       width: auto !important;
   }
 
-  .navbar .container, #main,
+  .topic-tab{
+      margin: 4px;
+  }
+ 
+  .mixlab-node-info{
+    padding: 8px 20px;
+  }
+
+#main,
   #content, #footer_main {
       width: 100%;
       min-width: 0;
@@ -52,35 +62,39 @@
       clear: both;
   }
 
+  .panel .inner{
+    background-color: #efefef;
+  }
+  .cell{
+    padding: 12px 0px 24px 10px;
+    margin-bottom: 8px;
+  }
   #responsive-sidebar-trigger {
       display: none;
   }
 
   #main {
       /*overflow: hidden;*/
-      margin: 20px auto;
+      margin: 8px auto;
       min-height: 0;
   }
 
   #content .panel {
-     margin: 24px;
+     margin: 8px;
+  }
+
+  .more_tab{
+    display: none;
+    height: auto;
+    width: 100%;
+    height: 100vh;
+   padding:12px; 
+    top: 0;
   }
 
   #sidebar {
       float: none;
-      position: absolute;
-      right: -100%;
-      top: 0;
-      background-color: #fff;
-      z-index: 999;
-      border: 5px solid #ccc;
-      border-right: 0;
-      -webkit-transition: .3s right;
-      -moz-transition: .3s right;
-      -ms-transition: .3s right;
-      -o-transition: .3s right;
-      transition: .3s right;
-      display: none;
+      padding: 0px 20%;
   }
 
   #content .topic_title {
@@ -100,17 +114,13 @@
   }
 
   #content .reply_count {
-      position: absolute;
-      bottom: 0;
-      left: 85px;
-      text-align: left;
-      line-height: 2em;
-      font-size: 10px;
+     
   }
 
   .topic_title_wrapper {
-      padding-left: 40px;
+     
   }
+  
 
   #main .topic_content p a.content_img,
   #main .reply_content p a.content_img {
