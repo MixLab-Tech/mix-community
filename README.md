@@ -170,3 +170,5 @@ env
 
 ### 其他说明
 此版本基于egg的nodejs社区二次开发而来。
+
+注意在运行前检查下配置文件，config.mongoose，config.passportGithub 等。
