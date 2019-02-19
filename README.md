@@ -32,6 +32,23 @@ $ brew services start mongodb
 
 其他系统安装方式请参考redis、mongodb官方文档。
 
+#### github账号
+由于登录采用的是github账号，所以需要去github申请下 Client ID 跟 Client Secret，路径：
+
+```bash
+Settings ---> Developer settings
+```
+
+然后填写到：
+```js
+//config.default.js
+
+config.passportGithub = {
+    key: '',
+    secret:''
+  };
+
+```
 
 ### Development
 
@@ -98,4 +115,13 @@ $ npm stop
 [egg]: https://eggjs.org
 
 ### 注意
-通过github登录，github账号的邮箱需要设置，如果未设置，会显示与已有用户重复，无法登录。
+1 通过github登录，github账号的邮箱需要设置，如果未设置，会显示与已有用户重复，无法登录。
+![tips](/tutorial/images/github_email.png)
+
+目前已发现qq邮箱不支持github账号认证，建议改用163邮箱或其他.
+
+认证邮件如下：
+![tips](/tutorial/images/verify_email.png)
+
+
+2 如果是通过nginx代理来部署服务，记得在nginx设置里把真实IP设置上，否则github的回调地址会出错，注意调试authorize请求.

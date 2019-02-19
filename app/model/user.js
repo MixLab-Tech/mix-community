@@ -53,7 +53,7 @@ module.exports = app => {
   });
 
   UserSchema.index({ loginname: 1 }, { unique: true });
-  UserSchema.index({ email: 1 }, { unique:false });
+  UserSchema.index({ email: 1 });
   UserSchema.index({ weixin: 1 }, { unique: true });
   UserSchema.index({ score: -1 });
   UserSchema.index({ githubId: 1 });
