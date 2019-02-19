@@ -18,12 +18,12 @@ module.exports = appInfo => {
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_5';
 
-  config.host = 'http://mixlab.top';
+  config.host = 'http://www.mixlab.top';
 
-  config.session_secret = 'mixlab_top_secret'; // 务必修改
+  config.session_secret =process.env.MIX_SECRET|| 'mixlab_topxxx'; // 务必修改
 
   // add your config here
-  config.middleware = [ 'locals', 'authUser', 'blockUser', 'errorPage', 'errorHandler' ];
+  config.middleware = ['locals', 'authUser', 'blockUser', 'errorPage', 'errorHandler'];
 
   config.authUser = {
     enable: true,
@@ -40,20 +40,20 @@ module.exports = appInfo => {
 
   // 版块
   config.tabs = [
-    [ 'ask', '问答', '有困难寻求帮助' ],
-    [ 'share', '分享', '就是喜欢分享' ],
-    [ 'ai_design', 'MLN000-人工设计智能', '探索AI+泛设计领域的应用' ],
-    [ 'wx_dev', 'MLN001-微信小程序', '用小程序开发一些好玩的小项目' ],
-    [ 'commercial_college', 'MLN002-奇点商学院', '讨论品牌/产品/运营思维' ],
-    [ 'ai_js', 'MLN003-Tensorflow.JS', '用前端实现AI相关的应用' ],
-    [ 'big_colors', 'MLN004-大数据x色彩图谱', '利用大数据提取色彩图谱关系，挖掘相关应用产品' ],
-    [ 'smart_writer', 'MLN005-智能写手', '用技术来辅助运营，包括大数据、爬虫、脚本等' ],
-    [ '30day_ai', 'MLN006-30天AI训练营', '爬虫技术栈，数据分析，算法入门，涉及javascript、python' ],
-    [ 'computational_design', 'MLN007-计算设计', '研究设计师和实际物理结构之间的链接，包括数字建造、参数化设计等等技术' ],
-    [ 'hackathon', 'MLN008-黑客马拉松', '用设计+技术，整合跨领域资源，创造具有想象力的科技产品' ],
-    [ 'hack_talk', 'MLN009-黑客说', 'mixlab无界社区与Get知识引擎联合出品的一档以科技为主，探索科技·生活·商业的视频栏目，每期邀请跨领域的人士进行思维碰撞，以启发大家思考科技与生活的融合' ],
-    [ 'i_brand_up', 'MLN010-万有品力', '写跨学科、跨行业人物专题' ],
-    [ 'smart_city', 'MLN011-智能城市', '城市空间、城市交通、城市生活的智能化探索' ]];
+    ['ask', '问答', '有困难寻求帮助'],
+    ['share', '分享', '就是喜欢分享'],
+    ['ai_design', 'MLN000-人工设计智能', '探索AI+泛设计领域的应用'],
+    ['wx_dev', 'MLN001-微信小程序', '用小程序开发一些好玩的小项目'],
+    ['commercial_college', 'MLN002-奇点商学院', '讨论品牌/产品/运营思维'],
+    ['ai_js', 'MLN003-Tensorflow.JS', '用前端实现AI相关的应用'],
+    ['big_colors', 'MLN004-大数据x色彩图谱', '利用大数据提取色彩图谱关系，挖掘相关应用产品'],
+    ['smart_writer', 'MLN005-智能写手', '用技术来辅助运营，包括大数据、爬虫、脚本等'],
+    ['30day_ai', 'MLN006-30天AI训练营', '爬虫技术栈，数据分析，算法入门，涉及javascript、python'],
+    ['computational_design', 'MLN007-计算设计', '研究设计师和实际物理结构之间的链接，包括数字建造、参数化设计等等技术'],
+    ['hackathon', 'MLN008-黑客马拉松', '用设计+技术，整合跨领域资源，创造具有想象力的科技产品'],
+    ['hack_talk', 'MLN009-黑客说', 'mixlab无界社区与Get知识引擎联合出品的一档以科技为主，探索科技·生活·商业的视频栏目，每期邀请跨领域的人士进行思维碰撞，以启发大家思考科技与生活的融合'],
+    ['i_brand_up', 'MLN010-万有品力', '写跨学科、跨行业人物专题'],
+    ['smart_city', 'MLN011-智能城市', '城市空间、城市交通、城市生活的智能化探索']];
   // ['job', '招聘']
 
   // RSS配置
@@ -109,9 +109,17 @@ module.exports = appInfo => {
   ];
 
   config.auth_cookie_name = 'egg_mixlab';
-  config.admins = {
-    
+  
+  //管理员
+  var admins_array=process.env.MIX_ADMINS.split(',');
+  console.log(admins_array)
+  var admins={};
+  for (let index = 0; index < admins_array.length; index++) {
+    const a = admins_array[index];
+    admins[a]=true;
   };
+
+  config.admins=admins;
 
   config.siteFile = {
     '/favicon.ico': '/public/images/mixlab_icon_32.png',
@@ -131,7 +139,7 @@ module.exports = appInfo => {
    * @see http://mongodb.github.io/node-mongodb-native/2.2/api/Db.html#createCollection
    */
   config.mongoose = {
-    url: process.env.EGG_MONGODB_URL || 'mongodb://127.0.0.1:27017/egg_mixlab',
+    url: process.env.EGG_MONGODB_URL || 'mongodb://127.0.0.1:27017/mix_test',
     options: {
       server: { poolSize: 20 },
       reconnectTries: 10,
