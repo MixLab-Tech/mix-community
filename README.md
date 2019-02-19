@@ -7,8 +7,6 @@ mix社区是mixlab的线上社区，mixlab是一所面向未来的实验室。
 让每个人无限可能
 Enable Infinite Possibilities for Everyone!
 
-此版本基于egg的nodejs社区二次开发而来。
-
 
 ## QuickStart
 如何开始：
@@ -153,3 +151,6 @@ server {
 }
 
 ```
+
+### 其他说明
+此版本基于egg的nodejs社区二次开发而来。
