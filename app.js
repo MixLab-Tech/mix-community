@@ -40,7 +40,7 @@ module.exports = app => {
   };
 
   const githubHandler = async (ctx, { profile }) => {
-    const email = profile.emails && profile.emails[0] && profile.emails[0].value;
+    const email = (profile.emails && profile.emails[0] && profile.emails[0].value)||"";
     let existUser = await ctx.service.user.getUserByGithubId(profile.id);
 
     // 用户不存在则创建
@@ -57,24 +57,23 @@ module.exports = app => {
     existUser.avatar = profile._json.avatar_url;
     existUser.githubUsername = profile.username;
     existUser.githubAccessToken = profile.accessToken;
+    
 
     try {
       await existUser.save();
     } catch (ex) {
+
       if (ex.message.indexOf('duplicate key error') !== -1) {
         let err;
-        if (ex.message.indexOf('email') !== -1) {
-          err = new Error('您 GitHub 账号的 Email 与之前在 mixlab 注册的 Email 重复了');
-          err.code = 'duplicate_email';
-          throw err;
-        }
-
+        
         if (ex.message.indexOf('loginname') !== -1) {
           err = new Error('您 GitHub 账号的用户名与之前在 mixlab 注册的用户名重复了');
           err.code = 'duplicate_loginname';
           throw err;
         }
+
       }
+
       throw ex;
     }
 
