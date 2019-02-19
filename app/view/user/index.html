@@ -163,7 +163,7 @@
 
 
     <div class="more_user_info">
-
+        <div id="mix-words"></div>
     </div>
 
 
@@ -263,3 +263,11 @@
   });
 </script>
 <% } %>
+
+
+<script src="/public/javascripts/mix-words.js"></script>
+<script>
+  var mixWords=new MixWord() ;
+  $('#mix-words').text(mixWords.getWord());
+  
+</script>
