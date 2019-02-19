@@ -3,7 +3,7 @@
 <div class='user_card'>
   <div>
     <a class='user_avatar' href="/user/<%= user.loginname %>">
-      <img src="<%= helper.proxy(user.avatar_url) %>" title="<%= user.loginname %>"/>
+      <img src="<%= helper.proxy(user.avatar_url) %>" title="<%= user.loginname %>" onerror='this.src="/public/images/default_avatar.gif"'/>
     </a>
     <span class='user_name'><a class='dark' href="/user/<%= user.loginname %>"><%= user.loginname %></a></span>
 

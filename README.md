@@ -152,5 +152,21 @@ server {
 
 ```
 
+##### 3 环境变量
+也许你会用上 process.env.NODE_ENV 来控制一些配置
+
+```bash
+#node中常用的到的环境变量是NODE_ENV，首先查看是否存在
+echo $NODE_ENV
+#如果不存在则添加环境变量
+export NODE_ENV=production
+#环境变量追加值
+export path=$path:/home/download:/usr/local/
+#某些时候需要删除环境变量
+unset NODE_ENV
+#某些时候需要显示所有的环境变量
+env
+```
+
 ### 其他说明
 此版本基于egg的nodejs社区二次开发而来。
