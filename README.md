@@ -125,3 +125,20 @@ $ npm stop
 
 
 2 如果是通过nginx代理来部署服务，记得在nginx设置里把真实IP设置上，否则github的回调地址会出错，注意调试authorize请求.
+一个简单的示例：
+```js
+//mixlab.conf
+
+server {
+  server_name www.mixlab.top
+  listen 80;
+ 
+  location / {
+    proxy_pass http://127.0.0.1:1215;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  }
+}
+
+```
